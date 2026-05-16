@@ -21,8 +21,8 @@ sid int8,
 sname varchar(50),
 smarks int1
 );
-show tables from vitcampus;
 
+show tables from vitcampus;
 insert into cse values(101,'Om',85);
 insert into cse values(102,'Faiz',85);
 insert into cse values(103,'Ishaan',50);
