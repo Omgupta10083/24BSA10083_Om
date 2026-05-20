@@ -1,0 +1,92 @@
+-- Constraints
+use vitcampus;
+show tables;
+
+create table Persons(
+ID int not null,
+LastName varchar(255) not null,
+FirstName varchar(255) not null,
+age int
+);
+desc persons;
+insert into persons values(1,"Gupta","Om",20);
+select * from persons;
+alter table persons
+modify age int not null;
+alter table persons
+add unique(age);
+alter table persons
+add Email varchar(100);
+alter table persons
+modify LastName varchar(255) null;
+alter table persons
+drop constraint age;
+
+-- CHECK CONSTRAINT
+create table Persons1(
+ID int not null,
+LastName varchar(255) not null,
+FirstName varchar(255) not null,
+age int not null,
+check (age>=18 and age<=40)
+);
+insert into persons1 values(1,"Gupta","Om",20);
+insert into persons1 values(1,"Rajput","Lucky",17);		-- ERROR
+select * from persons1;
+
+-- DEFAULT CONSTRAINT
+create table Persons2(
+ID int not null,
+LastName varchar(255) not null,
+FirstName varchar(255) not null,
+age int not null,
+city varchar(100) default "Coimbatore"
+);
+desc persons2;
+
+-- PRIMARY KEY
+create table products(
+pid int primary key,
+pname varchar(100) not null,
+prefNo int not null unique
+);
+desc products;
+insert into products values(101,"electronics", 19929);
+insert into products values(102,"furniture", 19930);
+select * from products;
+alter table products
+drop primary key;
+alter table products
+add primary key(pname);								-- We can change primary key to any column
+
+-- ALTER Commands on PRIMARY KEY
+alter table persons
+add primary key(id);
+alter table persons
+drop primary key;
+
+-- FOREIGN KEY
+create table category(
+cid int primary key,
+cname varchar(100) not null
+);
+desc category;
+insert into category values(101, "Electronics"),(102,"Home App");
+select * from category;
+
+create table products1(
+pid int primary key,
+pname varchar(100) not null,
+cid int,
+foreign key(cid) references category(cid)
+);
+desc products1;
+insert into products1 values(501,"HP Laptop",101);
+insert into products1 values(502,"Wooden Cub",102);
+insert into products1 values(503,"Power Bank",101);
+delete from category 
+where cid =101;
+update
+insert into products1 values(504,"Power Bank",64-bit encry key);			-- ERROR
+select * from products1;
+
