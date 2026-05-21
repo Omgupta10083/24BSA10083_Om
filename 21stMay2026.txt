@@ -1,0 +1,79 @@
+use vitcampus;
+create table category(
+cid int primary key,
+cname varchar(100) not null
+);
+desc category;
+insert into category values(101, "Electronics"),(102,"Home App");
+select * from category;
+create table products1(
+pid int primary key,
+pname varchar(100) not null,
+cid int,
+foreign key(cid) references category(cid) on delete cascade
+);
+desc products1;
+insert into products1 values(501,"HP Laptop",101);
+insert into products1 values(502,"Wooden Cub",102);
+insert into products1 values(503,"Power Bank",101);
+
+-- ORDER BY, GROUP BY, HAVING
+select * from worker;
+select first_name, department,salary from worker
+where department="admin" 
+order by salary desc;
+
+select Department, count(worker_id) from worker 
+where department="admin" or department="hr"
+group by DEPARTMENT
+order by department asc;
+
+select Department, sum(salary) from worker
+group by department;
+
+select Department, count(department) from worker
+group by department 
+having count(department) >= 3 
+order by department asc; 
+
+select department, sum(salary) from worker 
+group by department 
+having sum(salary)<=300000;
+
+select * from worker limit 1 offset 3;
+select * from worker limit 4 offset 3;
+
+create table toppers(id int);
+insert into toppers values(2),(3);
+select * from toppers;
+select first_name, department from worker
+where worker_id in (select id from toppers);
+
+select department, sum(salary) as Total from worker
+group by department
+order by sum(salary) asc
+limit 2;
+
+select first_name, department, salary from worker
+where department ="Admin"
+order by salary desc
+limit 1 offset 1;
+
+select first_name, department, salary from worker
+group by department
+order by salary desc
+limit 1 offset 1;
+
+select first_name, department, salary
+from worker w1
+where salary = (
+    select distinct salary
+    from worker w2
+    where w1.department = w2.department
+    order by salary desc
+    limit 1 offset 1
+);
+
+select department,max(salary) from worker 
+group by department;
+
