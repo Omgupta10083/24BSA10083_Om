@@ -89,6 +89,6 @@ GROUP BY DEPARTMENT;
 # 11. Write an SQL query to print the name of employees having the highest salary in each department.
 SELECT FIRST_NAME, DEPARTMENT, SALARY FROM Worker W1
 WHERE SALARY = (SELECT MAX(SALARY) FROM Worker W2
-		WHERE W1.DEPARTMENT = W2.DEPARTMENT
+				WHERE W1.DEPARTMENT = W2.DEPARTMENT
 );
 
