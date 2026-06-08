@@ -1,4 +1,4 @@
--- QUESTIONS
+-- QUESTIONS:
 -- 1. Find all students from the CS department with marks greater than 80.
 db.students.find({dept: "CS",marks: {$gt: 80}},{name: 1,dept: 1,marks: 1})
 
